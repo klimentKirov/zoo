@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Зоопарк{% endblock %}
+
+{% block body %}
+    <h1>Виртуальный зоопарк</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Клетка</th>
+                <th>Животное</th>
+                <th>Активность</th>
+                <th>Кормить</th>
+                <th>Убрать клетку</th>
+            </tr>
+        </thead>
+            <tbody>
+                {% for cage in cages %}
+                    <tr>
+                        <td>{{ cage.id }}</td>
+                        <td>{{ cage.animal.name }}</td>
+                        <td>
+                            {{ cage.animal.action }}
+                            <br/>
+                            <button class="action-btn" data-url="/api/get_animal_action" data-id="{{ cage.id }}">Вызвать активность</button>
+                        </td>
+                        <td>
+                            <button class="action-btn" data-url="/api/feed_animal" data-id="{{ cage.id }}">Кормить</button>
+                        </td>
+                        <td>
+                            <button  class="action-btn" data-url="/api/clear_cage" data-id="{{ cage.id }}">Убрать клетку</button>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+
+    </table>
+    <div>
+        <p>История:</p>
+        <p>
+        <ul class="result-list"></ul>
+        </p>
+    </div>
+    <div>
+        <p>
+            <a href="{{ path('animal_index') }}">Животные</a>
+        </p>
+        <p>
+            <a href="{{ path('cage_index') }}">Клетки</a>
+        </p>
+    </div>
+    {% block scripts %}
+        <script src="{{ asset('src/js/jquery-3.4.1.min.js') }}"></script>
+        <script>
+            $('.action-btn').on('click',function(e){
+
+                send($(this).data('url'), {cage:$(this).data('id')});
+
+            });
+            function send(url,params) {
+                $.ajax({
+                    url: url,
+                    data: params,
+                    success: function(response){
+                        show(response.response);
+                    }
+                })
+            }
+            function show(result) {
+                $('.result-list').append('<li>'+ result+'</li>');
+            }
+        </script>
+    {% endblock %}
+
+{% endblock %}

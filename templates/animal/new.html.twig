@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Животные:Добавление{% endblock %}
+
+{% block body %}
+    <h1>Добавление нового животного</h1>
+
+    {{ include('animal/_form.html.twig') }}
+
+    <a href="{{ path('animal_index') }}">назад</a>
+{% endblock %}

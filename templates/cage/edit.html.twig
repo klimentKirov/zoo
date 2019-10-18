@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Редактировать клетку{% endblock %}
+
+{% block body %}
+    <h1>Редактирование клетки</h1>
+
+    {{ include('cage/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('cage_index') }}">назад</a>
+
+    {{ include('cage/_delete_form.html.twig') }}
+{% endblock %}

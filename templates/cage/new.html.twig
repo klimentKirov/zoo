@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Добавить клетку{% endblock %}
+
+{% block body %}
+    <h1>Добавить клетку</h1>
+
+    {{ include('cage/_form.html.twig') }}
+
+    <a href="{{ path('cage_index') }}">назад</a>
+{% endblock %}

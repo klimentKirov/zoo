@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Животные{% endblock %}
+
+{% block body %}
+    <h1>Животные</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Специфическое действие</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for animal in animals %}
+            <tr>
+                <td>{{ animal.id }}</td>
+                <td>{{ animal.name }}</td>
+                <td>{{ animal.action }}</td>
+                <td>
+                    <a href="{{ path('animal_edit', {'id': animal.id}) }}">изменить</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">еще нет животных</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('animal_new') }}">Добавить</a>
+    <p>
+        <a href="{{ path('zoo') }}">Вернутся в зоопарк</a>
+    </p>
+{% endblock %}

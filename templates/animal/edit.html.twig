@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Редактировать животное{% endblock %}
+
+{% block body %}
+    <h1>Редактировать животное</h1>
+
+    {{ include('animal/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('animal_index') }}">назад</a>
+
+    {{ include('animal/_delete_form.html.twig') }}
+{% endblock %}
